@@ -34,11 +34,9 @@ function install-essentials() {
   if [ "$DISTRO" == "Ubuntu" ]; then
   apt-get update
   apt-get install webp inotify-tools wget -y
-
   elif [ "$DISTRO" == "Ubuntu" ]; then
   apt-get update 
   apt-get install webp inotify-tools wget -y
-
   elif [ "$DISTRO" == "CentOS" ]; then
   yum update 
   yum install webp inotify-tools wget -y
