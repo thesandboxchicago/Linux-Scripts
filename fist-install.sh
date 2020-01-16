@@ -27,7 +27,6 @@ function first-install() {
     apt-get install build-essential linux-headers-$(uname -r) haveged unattended-upgrades apt-listchanges -y
     apt-get clean -y
     apt-get autoremove -y
-    wget -q -O /etc/apt/apt.conf.d/50unattended-upgrades "https://raw.githubusercontent.com/complexorganizations/unattended-upgrades/master/config/50unattended-upgrades"
   fi
 }
 
