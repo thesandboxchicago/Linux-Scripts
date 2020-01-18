@@ -11,27 +11,53 @@ fi
 ## Root Check
 root-check
 
-    read -rp "Do You Want To Install Updates (y/n): " -e -i y INSTALL_UPDATES
     read -rp "Do You Want To Install TCP BBR (y/n): " -e -i n INSTALL_TCPBBR
     read -rp "Do You Want To Install Public SSH Key (y/n): " -e -i n INSTALL_PUBLIC_SSH
     read -rp "Do You Want To Install Private SSH Key (y/n): " -e -i n INSTALL_PRIVATE_SSH
 
-## First Install
-function first-install() {
-  if [ "$INSTALL_UPDATES" == "y" ]; then
-    apt-get update
-    apt-get upgrade -y
-    apt-get dist-upgrade -y
-    apt-get upgrade linux-generic -y
-    apt-get upgrade linux-base -y
-    apt-get install build-essential linux-headers-$(uname -r) haveged unattended-upgrades apt-listchanges -y
-    apt-get clean -y
-    apt-get autoremove -y
+function dist-check() {
+  if [ -e /etc/centos-release ]; then
+    DISTRO="CentOS"
+  elif [ -e /etc/debian_version ]; then
+    DISTRO=$(lsb_release -is)
+  elif [ -e /etc/arch-release ]; then
+    DISTRO="Arch"
+  elif [ -e /etc/fedora-release ]; then
+    DISTRO="Fedora"
+  elif [ -e /etc/redhat-release ]; then
+    DISTRO="Redhat"
+  else
+    echo "Your distribution is not supported (yet)."
+    exit
   fi
 }
 
-## First Install
-first-install
+# Check Operating System
+dist-check
+
+function install-updates() {
+  if [ "$DISTRO" == "Ubuntu" ]; then
+    apt-get update
+    apt-get upgrade -y
+    apt-get dist-upgrade -y
+    apt-get install linux-virtual -y
+  elif [ "$DISTRO" == "Debian" ]; then
+    apt-get update
+    apt-get upgrade -y
+    apt-get dist-upgrade -y
+    apt-get install linux-image-amd64 linux-headers-amd64 -y
+  elif [ "$DISTRO" == "CentOS" ]; then
+    yum update kernel -y
+  elif [ "$DISTRO" == "Fedora" ]; then
+    dnf update kernel -y
+  elif [ "$DISTRO" == "Fedora" ]; then
+    echo "Update Later #1"
+  fi
+  
+}
+
+## Install Updates
+install-updates
 
 ## Function For TCP BBR
 function tcp-install() {
