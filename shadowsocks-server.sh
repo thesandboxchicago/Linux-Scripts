@@ -118,20 +118,18 @@ shadowsocks-password
   ## Disable Ipv4 or Ipv6
   disable-ipvx
   
-    read -rp "Do You Want To Install V2RAY (y/n): " -e -i y INSTALL_V2RAY
-
   function v2ray-install() {
   CHECK_ARCHITECTURE=$(dpkg --print-architecture)
   FILE_NAME=$(v2ray-plugin-linux-$CHECK_ARCHITECTURE-v1.2.0.tar.gz)
-    if [ "$INSTALL_V2RAY" = "y" ]; then
       ## Installation Begins Here
       cd /etc/shadowsocks-libev/
       wget https://github.com/shadowsocks/v2ray-plugin/releases/download/v1.2.0/$FILE_NAME
       tar xvzf $FILE_NAME
       rm $FILE_NAME
-      
-    fi
-    
+  }
+  
+  v2ray-install
+  
 function limits-conf-install() {
   echo '* soft nofile 51200' >> /etc/security/limits.conf
   echo '* hard nofile 51200' >> /etc/security/limits.conf
@@ -228,6 +226,8 @@ function shadowsocks-configuration() {
 "server_port":$PORT_CHOICE,
 "password":"$PASSWORD_CHOICE",
 "method":"aes-256-cfb"
+"plugin":"/etc/shadowsocks-libev/$FILE_NAME",
+"plugin_opts":"server"
 }' >> /etc/shadowsocks-libev/config.json
 }
 
