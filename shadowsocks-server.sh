@@ -122,11 +122,11 @@ shadowsocks-password
 
   function v2ray-install() {
   CHECK_ARCHITECTURE=$(dpkg --print-architecture)
-  FILE_NAME=$(v2ray-plugin-linux-$CHECK_ARCHITECTURE-v1.1.0.tar.gz)
+  FILE_NAME=$(v2ray-plugin-linux-$CHECK_ARCHITECTURE-v1.2.0.tar.gz)
     if [ "$INSTALL_V2RAY" = "y" ]; then
       ## Installation Begins Here
       cd /etc/shadowsocks-libev/
-      wget https://github.com/shadowsocks/v2ray-plugin/releases/download/v1.1.0/$FILE_NAME
+      wget https://github.com/shadowsocks/v2ray-plugin/releases/download/v1.2.0/$FILE_NAME
       tar xvzf $FILE_NAME
       rm $FILE_NAME
       
