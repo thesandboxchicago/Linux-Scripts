@@ -42,12 +42,14 @@ function install-updates() {
     apt-get dist-upgrade -y
     apt-get install linux-virtual -y
     apt-get install linux-headers-$(uname -r) -y
+    apt-get install build-essential haveged fail2ban -y
   elif [ "$DISTRO" == "Debian" ]; then
     apt-get update
     apt-get upgrade -y
     apt-get dist-upgrade -y
     apt-get install linux-image-amd64 linux-headers-amd64 -y
     apt-get install linux-headers-$(uname -r) -y
+    apt-get install build-essential haveged fail2ban -y
   elif [ "$DISTRO" == "CentOS" ]; then
     yum update kernel -y
   elif [ "$DISTRO" == "Fedora" ]; then
