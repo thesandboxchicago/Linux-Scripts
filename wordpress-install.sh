@@ -37,7 +37,6 @@ install-essentials
 ## Start Installation Of Wordpress
 function install-wordpress() {
     rm /var/www/html/index.nginx-debian.html
-    sed -i 's|index index.html index.htm index.nginx-debian.html;$|index index.html index.php;|' /etc/nginx/sites-available/default
     cd /tmp
     wget https://wordpress.org/latest.tar.gz
     tar xf latest.tar.gz
@@ -48,6 +47,15 @@ function install-wordpress() {
 
 ## Install Wordpresss
 install-wordpress
+
+function nginx-conf() {
+    sed -i "s|index index.html index.htm index.nginx-debian.html;$|index index.html index.php;|' /etc/nginx/sites-available/default
+    sed -i 's|#location ~ \.php$ {|location ~ \.php$ {|' /etc/nginx/sites-available/default
+    sed -i 's|#include snippets/fastcgi-php.conf;$|include snippets/fastcgi-php.conf;|' /etc/nginx/sites-available/default
+    sed -i 's|#fastcgi_pass unix:/run/php/php7.3-fpm.sock;$|fastcgi_pass unix:/run/php/php7.3-fpm.sock;|' /etc/nginx/sites-available/default
+}
+
+nginx-conf
 
 ## Function for correct permission
 function correct-permissions() {
