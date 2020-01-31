@@ -156,10 +156,6 @@ define( 'COMPRESS_SCRIPTS',    true );
 define( 'CONCATENATE_SCRIPTS', true );
 define( 'ENFORCE_GZIP',        true );
 
-/* CRON */
-define( 'DISABLE_WP_CRON',      'false' );
-define( 'ALTERNATE_WP_CRON',    'false' );
-
 /* Updates */
 define( 'WP_AUTO_UPDATE_CORE', true );
 }
