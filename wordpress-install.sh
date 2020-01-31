@@ -49,16 +49,29 @@ function install-wordpress() {
 install-wordpress
 
 function nginx-conf() {
-    sed -i "s|index index.html index.htm index.nginx-debian.html;$|index index.html index.php;|' /etc/nginx/sites-available/default
-    sed -i 's|#location ~ \.php$ {|location ~ \.php$ {|' /etc/nginx/sites-available/default
-    sed -i 's|#include snippets/fastcgi-php.conf;$|include snippets/fastcgi-php.conf;|' /etc/nginx/sites-available/default
-    sed -i 's|#fastcgi_pass unix:/run/php/php7.3-fpm.sock;$|fastcgi_pass unix:/run/php/php7.3-fpm.sock;|' /etc/nginx/sites-available/default
+  rm /etc/nginx/sites-available/default
+  echo server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+        index index.php;
+        server_name _;
+        location / {
+                try_files $uri $uri/ /index.php$is_args$args;
+        }
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+        }
+}" >> /etc/nginx/sites-available/default
+
 }
 
 nginx-conf
 
 ## Function for correct permission
 function correct-permissions() {
+service nginx restart
 cd /var/www/
 chown www-data:www-data  -R *
 find . -type d -exec chmod 755 {} \;
