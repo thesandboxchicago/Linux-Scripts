@@ -123,3 +123,44 @@ function lets-encrypt() {
 }
 
 lets-encrypt
+
+function wp-conf() {
+/* SSL */
+define( 'FORCE_SSL_LOGIN', true );
+define( 'FORCE_SSL_ADMIN', true );
+
+/* Specify maximum number of Revisions. */
+define( 'WP_POST_REVISIONS', '3' );
+/* Media Trash. */
+define( 'MEDIA_TRASH', true );
+/* Trash Days. */
+define( 'EMPTY_TRASH_DAYS', '7' );
+
+/* Multisite. */
+define( 'WP_ALLOW_MULTISITE', false );
+
+/* WordPress debug mode for developers. */
+define( 'WP_DEBUG',         false );
+define( 'WP_DEBUG_LOG',     false );
+define( 'WP_DEBUG_DISPLAY', false );
+define( 'SCRIPT_DEBUG',     false );
+define( 'SAVEQUERIES',      false );
+
+/* WordPress Cache */
+define( 'WP_CACHE', true );
+
+/* Compression */
+define( 'COMPRESS_CSS',        true );
+define( 'COMPRESS_SCRIPTS',    true );
+define( 'CONCATENATE_SCRIPTS', true );
+define( 'ENFORCE_GZIP',        true );
+
+/* CRON */
+define( 'DISABLE_WP_CRON',      'false' );
+define( 'ALTERNATE_WP_CRON',    'false' );
+
+/* Updates */
+define( 'WP_AUTO_UPDATE_CORE', true );
+}
+
+wp-conf
