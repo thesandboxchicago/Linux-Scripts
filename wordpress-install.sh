@@ -53,16 +53,22 @@ function nginx-conf() {
 echo  "server {
         listen 80 default_server;
         listen [::]:80 default_server;
+
         root /var/www/html;
+
         index index.php;
+
         server_name _;
+
         location / {
                 try_files $uri $uri/ /index.php$is_args$args;
         }
+
         location ~ \.php$ {
                 include snippets/fastcgi-php.conf;
                 fastcgi_pass unix:/run/php/php7.3-fpm.sock;
         }
+
 }" >> /etc/nginx/sites-available/default
 
 }
