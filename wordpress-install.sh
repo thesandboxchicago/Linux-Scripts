@@ -36,7 +36,7 @@ install-essentials
 
 ## Start Installation Of Wordpress
 function install-wordpress() {
-    rm /var/www/html/index.html
+    rm /var/www/html/index.nginx-debian.html
     cd /tmp
     wget https://wordpress.org/latest.tar.gz
     tar xf latest.tar.gz
