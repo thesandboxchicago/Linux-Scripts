@@ -29,12 +29,6 @@ function install-essentials() {
     apt-get install nginx -y
     apt-get install php7.3 php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
     apt-get install unit-php -y
-    cd /tmp/
-    wget http://repo.mysql.com/mysql-apt-config_0.8.14-1_all.deb
-    dpkg -i mysql-apt-config_0.8.13-1_all.deb
-    rm mysql-apt-config_0.8.13-1_all.deb 
-    apt-get update
-    apt-get install mysql-server -y
   fi
 }
 
@@ -63,6 +57,17 @@ find . -type f -exec chmod 644 {} \;
 
 ## Run correct permissions 
 correct-permissions
+
+function mysql-install() {
+    cd /tmp/
+    wget http://repo.mysql.com/mysql-apt-config_0.8.14-1_all.deb
+    dpkg -i mysql-apt-config_0.8.13-1_all.deb
+    rm mysql-apt-config_0.8.13-1_all.deb 
+    apt-get update
+    apt-get install mysql-server -y
+  }
+    
+    mysql-install
 
 function mysql-setup() {
 echo "RUN THESE COMMANDS"
