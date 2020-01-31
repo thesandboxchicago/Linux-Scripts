@@ -78,6 +78,7 @@ nginx-conf
 ## Function for correct permission
 function correct-permissions() {
 service nginx restart
+service php7.3-fpm restart
 cd /var/www/
 chown www-data:www-data  -R *
 find . -type d -exec chmod 755 {} \;
