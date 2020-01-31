@@ -90,8 +90,8 @@ correct-permissions
 function mysql-install() {
     cd /tmp/
     wget http://repo.mysql.com/mysql-apt-config_0.8.14-1_all.deb
-    dpkg -i mysql-apt-config_0.8.13-1_all.deb
-    rm mysql-apt-config_0.8.13-1_all.deb 
+    dpkg -i mysql-apt-config_0.8.14-1_all.deb 
+    rm mysql-apt-config_0.8.14-1_all.deb 
     apt-get update
     apt-get install mysql-server -y
   }
