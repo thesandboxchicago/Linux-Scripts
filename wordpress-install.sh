@@ -28,7 +28,6 @@ function install-essentials() {
   if [ "$DISTRO" == "Debian" ]; then
     apt-get install nginx -y
     apt-get install php7.3 php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
-    apt-get install unit-php -y
   fi
 }
 
