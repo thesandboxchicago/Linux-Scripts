@@ -78,3 +78,12 @@ echo "--------------------------------------------------------------------------
 
 # Run SQL Setup
 mysql-setup
+
+
+function lets-encrypt() {
+  sudo apt-get install certbot python-certbot-nginx -y
+  sudo certbot --nginx
+  sudo certbot renew --dry-run
+}
+
+lets-encrypt
