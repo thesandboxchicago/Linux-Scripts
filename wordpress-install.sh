@@ -27,7 +27,7 @@ dist-check
 function install-essentials() {
   if [ "$DISTRO" == "Debian" ]; then
     apt-get install nginx -y
-    apt-get install php7.3 php-curl php-common php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip php-mysql php-mcrypt -y
+    apt-get install php7.3 php-curl php-common php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip php-mysql -y
     apt-get install unit-php -y
     cd /tmp/
     wget http://repo.mysql.com/mysql-apt-config_0.8.13-1_all.deb
