@@ -41,6 +41,8 @@ function install-wordpress() {
     wget https://wordpress.org/latest.tar.gz
     tar xf latest.tar.gz
     sudo mv /tmp/wordpress/* /var/www/html
+    rm latest.tar.gz
+    rm -rf wordpress
 }
 
 ## Install Wordpresss
