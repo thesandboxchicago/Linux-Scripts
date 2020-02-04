@@ -11,6 +11,7 @@ fi
 ## Root Check
 root-check
 
+    read -rp "Do You Want To Install unattended upgrades (y/n): " -e -i n UNATTENDED_UPDATE
     read -rp "Do You Want To Install TCP BBR (y/n): " -e -i n INSTALL_TCPBBR
     read -rp "Do You Want To Install Public SSH Key (y/n): " -e -i n INSTALL_PUBLIC_SSH
     read -rp "Do You Want To Install Private SSH Key (y/n): " -e -i n INSTALL_PRIVATE_SSH
@@ -62,6 +63,17 @@ function install-updates() {
 
 ## Install Updates
 install-updates
+
+## Function for unattended update to the server
+function unattended-upgrades() {
+  if [ "$UNATTENDED_UPDATE" == "y" ]; then
+    apt-get install unattended-upgrades apt-listchanges -y
+    dpkg-reconfigure unattended-upgrades
+  fi
+}
+
+## Function for unattended-upgrades
+unattended-upgrades
 
 ## Function For TCP BBR
 function tcp-install() {
