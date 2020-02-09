@@ -44,9 +44,9 @@ function install-essentials() {
     ufw allow "http"
     ufw allow "https"
     ufw allow "ssh"
-    ufw enable
     ufw default deny incoming
     ufw default deny outgoing
+    ufw enable
   fi
 }
 
