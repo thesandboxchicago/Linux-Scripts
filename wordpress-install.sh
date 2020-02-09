@@ -37,10 +37,8 @@ function install-essentials() {
     ## Update
     apt-get install unattended-upgrades apt-listchanges -y
     dpkg-reconfigure unattended-upgrades
-    ## Fail2Ban
-    apt-get install fail2ban -y
     ## UFW
-    apt-get install iptables iptables-persistent ufw -y
+    apt-get install iptables iptables-persistent ufw fail2ban -y
     ufw allow "http"
     ufw allow "https"
     ufw allow "ssh"
@@ -127,8 +125,6 @@ echo "server {
       fastcgi_pass unix:/run/php/php7.3-fpm.sock;
     }
 }" >> /etc/nginx/sites-available/default
-
-sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 }
 
 ## Run the function
@@ -164,9 +160,9 @@ mysql-setup
 
 # Installs and setups lets-encrypt 
 function lets-encrypt() {
-  sudo apt-get install certbot python-certbot-nginx -y
-  sudo certbot --nginx
-  sudo certbot renew --dry-run
+  apt-get install certbot python-certbot-nginx -y
+  certbot --nginx
+  certbot renew --dry-run
 }
 
 # lets-encrypt function
