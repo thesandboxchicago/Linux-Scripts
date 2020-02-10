@@ -17,16 +17,8 @@ root-check
     read -rp "Do You Want To Install Private SSH Key (y/n): " -e -i n INSTALL_PRIVATE_SSH
 
 function dist-check() {
-  if [ -e /etc/centos-release ]; then
-    DISTRO="CentOS"
-  elif [ -e /etc/debian_version ]; then
+  if [ -e /etc/debian_version ]; then
     DISTRO=$(lsb_release -is)
-  elif [ -e /etc/arch-release ]; then
-    DISTRO="Arch"
-  elif [ -e /etc/fedora-release ]; then
-    DISTRO="Fedora"
-  elif [ -e /etc/redhat-release ]; then
-    DISTRO="Redhat"
   else
     echo "Your distribution is not supported (yet)."
     exit
@@ -51,12 +43,6 @@ function install-updates() {
     apt-get install linux-image-amd64 linux-headers-amd64 -y
     apt-get install linux-headers-$(uname -r) -y
     apt-get install build-essential haveged fail2ban -y
-  elif [ "$DISTRO" == "CentOS" ]; then
-    yum update kernel -y
-  elif [ "$DISTRO" == "Fedora" ]; then
-    dnf update kernel -y
-  elif [ "$DISTRO" == "Fedora" ]; then
-    echo "Update Later #1"
   fi
   
 }
