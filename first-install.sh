@@ -35,14 +35,13 @@ function install-updates() {
     apt-get dist-upgrade -y
     apt-get install linux-virtual -y
     apt-get install linux-headers-$(uname -r) -y
-    apt-get install build-essential haveged fail2ban -y
+    apt-get install build-essential haveged -y
   elif [ "$DISTRO" == "Debian" ]; then
     apt-get update
     apt-get upgrade -y
     apt-get dist-upgrade -y
-    apt-get install linux-image-amd64 linux-headers-amd64 -y
     apt-get install linux-headers-$(uname -r) -y
-    apt-get install build-essential haveged fail2ban -y
+    apt-get install build-essential haveged -y
   fi
   
 }
@@ -99,6 +98,7 @@ public-ssh-install
 
 function private-ssh-install() {
   if [ "$INSTALL_PRIVATE_SSH" == "y" ]; then
+    apt-get install openssh-server fail2ban -y
     read -p 'Private SSH Key: ' PRIVATE_SSH_KEY
     eval `ssh-agent`
     mkdir -p /root/.ssh
