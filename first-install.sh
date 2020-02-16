@@ -34,14 +34,14 @@ function dist-check() {
 dist-check
 
 function install-updates() {
-  if [ "$DISTRO" == "Ubuntu" ]; then
+  if [ "$DISTRO" == "ubuntu" ]; then
     apt-get update
     apt-get upgrade -y
     apt-get dist-upgrade -y
     apt-get install linux-virtual -y
     apt-get install linux-headers-$(uname -r) -y
     apt-get install build-essential haveged -y
-  elif [ "$DISTRO" == "Debian" ]; then
+  elif [ "$DISTRO" == "debian" ]; then
     apt-get update
     apt-get upgrade -y
     apt-get dist-upgrade -y
