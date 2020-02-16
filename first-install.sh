@@ -16,9 +16,14 @@ root-check
     read -rp "Do You Want To Install Public SSH Key (y/n): " -e -i n INSTALL_PUBLIC_SSH
     read -rp "Do You Want To Install Private SSH Key (y/n): " -e -i n INSTALL_PRIVATE_SSH
 
+# Detect Operating System
 function dist-check() {
-  if [ -e /etc/debian_version ]; then
-    DISTRO=$(lsb_release -is)
+  if [ -e /etc/os-release ]; then
+    # shellcheck disable=SC1091
+    source /etc/os-release
+    DISTRO=$ID
+    # shellcheck disable=SC2034
+    VERSION=$VERSION_ID
   else
     echo "Your distribution is not supported (yet)."
     exit
