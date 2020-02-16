@@ -47,6 +47,7 @@ function install-updates() {
     apt-get dist-upgrade -y
     apt-get install linux-headers-$(uname -r) -y
     apt-get install build-essential haveged -y
+    apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com
   fi
   
 }
